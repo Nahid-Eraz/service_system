@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
+use App\Models\Division;
+use App\Models\Upazila;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -20,11 +23,23 @@ class ClientController extends Controller
     {
         //
     }
+
     public function profileview()
     {
-        return view('frontend.customerpanel.customerprofile');
+        $division = Division::get();
+        return view('frontend.customerpanel.customerprofile',compact('division'));
     }
-    
+
+
+    public function getdistrict($id){
+        $district = District::where('division_id', $id)->get();
+        return response()->json($district);
+    }
+
+    public function getupazila($district_id){
+        $upazilla = Upazila::where('district_id', $district_id)->get();
+        return response()->json($upazilla);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -75,7 +90,7 @@ class ClientController extends Controller
     public function login(){
         // return view('frontend.login');
         return back()->withInput();
-        
+
     }
     public function loginSubmit(Request $request){
         $data= $request->all();
