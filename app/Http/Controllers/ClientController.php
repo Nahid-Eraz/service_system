@@ -19,32 +19,17 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index()
     {
         //
     }
 
-    public function profileview()
-    {
-        $division = Division::get();
-        return view('frontend.customerpanel.customerprofile',compact('division'));
-    }
 
-
-    public function getdistrict($id){
-        $district = District::where('division_id', $id)->get();
-        return response()->json($district);
-    }
-
-    public function getupazila($district_id){
-        $upazilla = Upazila::where('district_id', $district_id)->get();
-        return response()->json($upazilla);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -102,7 +87,8 @@ class ClientController extends Controller
         if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'user_type'=> 'customer'])){
             $request->session()->put('user', $data['email']);
             request()->session()->flash('success','Successfully login');
-            return view('frontend.customerpanel.customerprofile');;
+            $division = Division::get();
+            return view('frontend.customerpanel.customerprofile', compact('division'));
         }
         else{
             request()->session()->flash('error','Invalid email and password pleas try again!');
@@ -140,7 +126,22 @@ class ClientController extends Controller
             return back();
         }
     }
+    public function profileview()
+    {
+        $division = Division::get();
+        return view('frontend.customerpanel.customerprofile',compact('division'));
+    }
 
+
+    public function getdistrict($id){
+        $district = District::where('division_id', $id)->get();
+        return response()->json($district);
+    }
+
+    public function getupazila($district_id){
+        $upazilla = Upazila::where('district_id', $district_id)->get();
+        return response()->json($upazilla);
+    }
     public function create(array $data){
         // if(request()->has('image')){
         //     $image = request()->file('image');
