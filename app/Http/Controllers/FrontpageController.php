@@ -7,6 +7,7 @@ use App\Models\District;
 use App\Models\Division;
 use App\Models\Upazila;
 use App\Models\WorkOrder;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -38,9 +39,8 @@ class FrontpageController extends Controller
 
         $workorder = new WorkOrder;
 
-        
 
-        $workorder->provider_id = Auth::user()->id;
+        $workorder->users_id = Auth::user()->id;
         $workorder->category_id = $request->category_id;
         $workorder->division_id = $request->division_id;
         $workorder->district_id = $request->district_id;

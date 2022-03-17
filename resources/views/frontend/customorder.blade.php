@@ -15,12 +15,14 @@
 
         <h3 class="text-center mb-3">Service Form</h3>
 
-        <div class="d-flex">     
+        <div class="d-flex">
             <form id="custom_order_add" method="POST" enctype="multipart/form-data">
                 @csrf
              <div class="row">
-
-                <div class="form-group col-sm-6"> 
+                {{-- <div style="display: none">
+                    <input type="text" name="user_id" value="{{ Auth::user()->id }}">
+                </div> --}}
+                <div class="form-group col-sm-6">
                     <label for="">Category Name</label>
                     <select name="category_id" id="category_id" class="form-control w-100">
                         <option selected disabled>Select Category</option>
@@ -30,7 +32,7 @@
                     </select>
                 </div>
 
-                <div class="form-group col-sm-6"> 
+                <div class="form-group col-sm-6">
                     <label for="">Service Title</label>
                     <input type="text" id="" name="order_title" class="form-control" placeholder="Make a service title" required>
                 </div>
@@ -58,20 +60,20 @@
                         <option selected disabled>Select Upazila</option>
                     </select>
                 </div>
-    
-                <div class="form-group col-sm-6"> 
+
+                <div class="form-group col-sm-6">
                     <label>Address</label>
                     <input type="text" name="address" class="form-control" placeholder="Add address" required>
                 </div>
 
-                <div class="form-group col-sm-6"> 
+                <div class="form-group col-sm-6">
                     <label>Time and Date</label>
                     <input type="date" class="form-control" name="expiration_date"required>
                 </div>
-    
+
                   {{-- <div class="form-group col-sm-6">
                       <label>Enviornment Status</label>
-                      
+
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
                             <label class="form-check-label" for="gridRadios1">
@@ -90,28 +92,28 @@
                             Both
                             </label>
                         </div>
-    
+
                   </div> --}}
-    
+
                 <div class="form-group col-sm-6">
                     <label for="umur">Workers</label>
                     <input type="number" name="worker_amount" min= 0 id="" class="form-control" placeholder="Select Worker amount" required>
                 </div>
-              
+
                 <div class="form-group col-sm-6">
                     <label for="alamat">Description</label>
                     <textarea class="form-control" name="order_description" id="alamat" rows="3" placeholder="Brief about the service"></textarea>
-                </div>   
+                </div>
              </div>
              @guest
                  @if (Route::has('login'))
                     <a type="button" class="btn btn-primary" href="{{ route('customer.login') }}">Login</a>
                  @endif
             @else
-                    
+
                     <button type="submit" class="btn btn-primary">Submit</button>
             @endguest
-             
+
 
             </form>
         </div>
@@ -132,7 +134,7 @@
             type: "GET",
             url: "/custom/order/district/" + divisionID,
             success: function(res) {
-                
+
                 if (res) {
                     // console.log(res);
                     $("#district_id").empty();
@@ -190,14 +192,14 @@
 </script>
 
 <script>
-    
+
     $('#custom_order_add').on('submit', function (e){
             e.preventDefault();
 
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                } 
+                }
             });
             var formData = new FormData($('#custom_order_add')[0]);
 

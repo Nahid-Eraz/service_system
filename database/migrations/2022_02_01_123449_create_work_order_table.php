@@ -15,7 +15,7 @@ class CreateWorkOrderTable extends Migration
     {
         Schema::create('work_order', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('provider_id');
+            $table->integer('users_id');
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('division_id');
             $table->unsignedInteger('district_id');
@@ -32,7 +32,7 @@ class CreateWorkOrderTable extends Migration
             $table->string('slug')->nullable();
 
 
-            // $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade');
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');

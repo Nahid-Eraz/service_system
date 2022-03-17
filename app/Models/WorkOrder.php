@@ -9,7 +9,7 @@ class WorkOrder extends Model
 {
     use HasFactory;
     protected $table = 'work_order';
-    protected $fillable = ['provider_id','category_id',
+    protected $fillable = ['users_id','category_id',
     'division_id',
     'district_id',
     'upazila_id',

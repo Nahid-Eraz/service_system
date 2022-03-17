@@ -62,6 +62,36 @@
                     <button class="btn-primary btn" data-toggle="modal" data-target="#exampleModal">Post A job</button>
                 </div>
             </div>
+
+            <table class="table mt-4">
+                <tbody>
+                    <tr>
+                        <th>#</th>
+                        <th>Order Title</th>
+                        <th>Date</th>
+                        <th>Job Discription</th>
+                        <th>Worker Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </tbody>
+                <tbody>
+                    @php
+                        $i=0;
+                        $auth_user = Auth::user()->id
+                    @endphp
+                    @foreach (App\Models\WorkOrder::where( 'users_id',$auth_user)->get() as $item )
+                        <tr>
+                            <td>{{ ++$i }}</td>
+                            <td>{{ $item->order_title}}</td>
+                            <td>{{ $item->expiration_date}}</td>
+                            <td>{{ $item->order_description}}</td>
+                            <td>{{ $item->worker_amount}}</td>
+                            <td></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
         </div>
 
       </div>

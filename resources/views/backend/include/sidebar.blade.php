@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link" href="./category">
+          <a class="nav-link" href="{{url('/category')}}">
             <i class="material-icons">content_paste</i>
             <p>Service Categories</p>
           </a>
