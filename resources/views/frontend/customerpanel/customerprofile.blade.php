@@ -6,7 +6,10 @@
           <a class="nav-link active text-danger" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">My Account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Job Portal</a>
+          <a class="nav-link text-danger" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Post Job</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" id="request-tab" data-toggle="tab" href="#request" role="tab" aria-controls="request" aria-selected="false">Job Request</a>
         </li>
       </ul>
 
@@ -79,7 +82,7 @@
                         $i=0;
                         $auth_user = Auth::user()->id
                     @endphp
-                    @foreach (App\Models\WorkOrder::where( 'users_id',$auth_user)->get() as $item )
+                    @foreach (App\Models\WorkOrder::where( 'users_id',$auth_user)->orderByDesc('expiration_date')->get() as $item )
                         <tr>
                             <td>{{ ++$i }}</td>
                             <td>{{ $item->order_title}}</td>

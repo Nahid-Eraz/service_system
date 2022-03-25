@@ -31,6 +31,7 @@ class CreateProvidersTable extends Migration
             $table->string('total_applied')->default(0);
             $table->string('complete_work')->default(0);
             $table->string('post_work')->default(0);
+            $table->string('balance')->default(0);
 
 
 

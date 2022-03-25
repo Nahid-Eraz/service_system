@@ -12,8 +12,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
@@ -99,7 +97,14 @@
                                 <li><span class="text-info">{{ $item->category->name}}</span></li>
                                 <li><p>{{ $item->worker_amount }} Person</p></li>
                                 <li><p>{{ $item->order_description }}</p></li>
-                                <li></li>
+                                <li class="text-right">
+                                @guest
+                                    @if (Route::has('login'))
+                                        <a type="button" class="btn btn-primary" href="{{ route('customer.login') }}">Request</a>
+                                    @endif
+                                @else
+                                    <button class="btn-md btn-primary">Request</button>
+                                @endguest</li>
                             </ul>
 
 
