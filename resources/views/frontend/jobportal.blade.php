@@ -31,7 +31,7 @@
             {{-- <div class="border-0"> --}}
                 <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     @foreach (App\Models\WorkOrder::Where('expiration_date','>',$today)->get() as $item  )
-                        <a class="card-body nav-link nav-text" id="v-pills-{{ $item->id }}-tab" data-toggle="pill" href="#v-pills-{{ $item->id }}" role="tab" aria-controls="v-pills-{{ $item->id }}" aria-selected="false">
+                        <a class="btn card-body nav-link nav-text" id="v-pills-{{ $item->id }}-tab" data-toggle="pill" href="#v-pills-{{ $item->id }}" role="tab" aria-controls="v-pills-{{ $item->id }}" aria-selected="false">
                             {{ ++$i }}. {{ $item->order_title }}<br>
                             <small>{{ $item->expiration_date }}</small>
                             {{-- <hr> --}}
