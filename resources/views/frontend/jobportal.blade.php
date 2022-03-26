@@ -21,8 +21,6 @@
 <div class='container-fluid'>
     @php
         $i=0;
-        $user_id = Auth::user()->id;
-
     @endphp
 
 
@@ -66,26 +64,35 @@
                                     @else
 
                                     @php
-                                        $orderrequest = App\Models\OrderRequests::select('work_order_id')->where('work_order_id',$item->id)->get();
-                                        // $orreq = json_encode($orderrequest);
-                                        echo( $orderrequest);
-                                        // DB::table('work_odrder')->join('orderrequests', 'work_order.id', '=', 'orderrequests.work_order_id')->select('table1.*', 'table2.*')->get();
+                                        $item_id = $item->id;
+                                        $user_id = Auth::user()->id;
+                                        $orderrequest = App\Models\OrderRequests::select('work_order_id','users_id')
+                                                                                // ->where('work_order_id',$item_id)
+                                                                                ->where('users_id',$user_id)
+                                                                                ->get();
+                                        foreach ($orderrequest as $key) {
+                                            $orreq1 = $key->users_id;
+                                            $orreq = $key->work_order_id;
+                                            echo ($orreq1);
+                                            echo ($orreq);
+                                        };
+
+                                        // // $orderrequest1 = App\Models\OrderRequests::select('users_id','work_order_id')->where('work_order_id',$item->id)->where('users_id',$user_id)->get();
+                                        // foreach ($orderrequest1 as $key2) {
+                                        //     $workorder = $key2->users_id;
+                                        //     echo ($workorder);
+                                        // }
                                     @endphp
                                         @if(($item->users_id == $user_id))
                                             <a class="btn btn-md btn-primary disabled" onclick="orderRequest({{ $item->id }})" href="javascript:void(0);" >Request</a>
-                                        @else
-                                            {{-- @foreach($orderrequest as $item2)
-                                                {{-- @if($item2->users_id == $user_id && $item->id == $item2->work_order_id )
-                                                    <a class="btn btn-md btn-primary disabled" onclick="orderRequest({{ $item->id }})" href="javascript:void(0);" >Request</a>
-                                                    @break
-                                                @else
-                                                    <a class="btn btn-md btn-primary" href="javascript:void(0);" onclick="orderRequest({{ $item->id }})">Request</a>
-                                                    @continue
-                                                @endif --}}
 
+                                        @elseif($orreq1 == $user_id && $orreq == $item_id)
 
-                                            {{-- @endforeach --}}
-                                            <a class="btn btn-md btn-primary" href="javascript:void(0);" onclick="orderRequest({{ $item->id }})">Request</a>
+                                                <a class="btn btn-md btn-primary disabled" onclick="orderRequest({{ $item->id }})" href="javascript:void(0);" >Request</a>
+
+                                            @else
+                                                <a class="btn btn-md btn-primary" href="javascript:void(0);" onclick="orderRequest({{ $item->id }})">Request</a>
+                                            
                                         @endif
 
                                     @endguest
