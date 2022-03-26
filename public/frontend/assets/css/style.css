@@ -9685,11 +9685,12 @@ input:focus {
     }
 }
 
-.job-portal-bar {
-    background-color: #ffffff;
-    border-radius: 15px;
+.nav-text {
+    color: #000;
+    /* border-radius: 15px; */
     box-shadow: 5px 6px 5px rgb(211, 211, 211);
 }
-.job-portal-bar:hover {
+.nav-text:hover {
+    color: #000;
     background-color: rgb(255, 179, 179);
 }
