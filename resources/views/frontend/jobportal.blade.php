@@ -70,9 +70,9 @@
     <div class="col-sm-4">
         <div class="card border-0">
             <div class="card-body border-0">
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="nav flex-column nav-pills job-portal-bar" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     @foreach (App\Models\WorkOrder::Where('expiration_date','>',$today)->get() as $item  )
-                        <a class="nav-link text-dark" id="v-pills-{{ $item->id }}-tab" data-toggle="pill" href="#v-pills-{{ $item->id }}" role="tab" aria-controls="v-pills-{{ $item->id }}" aria-selected="false">
+                        <a class="nav-link text-dark " id="v-pills-{{ $item->id }}-tab" data-toggle="pill" href="#v-pills-{{ $item->id }}" role="tab" aria-controls="v-pills-{{ $item->id }}" aria-selected="false">
                             {{ ++$i }}. {{ $item->order_title }}<br>
                             <small>{{ $item->expiration_date }}</small>
                             <hr>
