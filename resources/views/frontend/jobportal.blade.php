@@ -26,7 +26,7 @@
 
 
 <div class="row pt-5">
-    <div class="col-sm-4">
+    <div class="col-sm-4" style="height:600px; overflow-y: scroll">
         <div class="card border-0">
             {{-- <div class="border-0"> --}}
                 <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -57,13 +57,22 @@
                                 <li><p>{{ $item->worker_amount }} Person</p></li>
                                 <li><p>{{ $item->order_description }}</p></li>
                                 <li class="text-right">
-                                @guest
-                                    @if (Route::has('login'))
-                                        <a type="button" class="btn btn-primary" href="{{ route('customer.login') }}">Request</a>
-                                    @endif
-                                @else
-                                    <a class="btn btn-md btn-primary" href="javascript:void(0);" onclick="orderRequest({{ $item->id }})">Request</a>
-                                @endguest</li>
+                                    @guest
+                                        @if (Route::has('login'))
+                                            <a type="button" class="btn btn-primary" href="{{ route('customer.login') }}">Request</a>
+                                        @endif
+                                    @else
+                                    @php
+                                        $user_id = Auth::user()->id;
+                                    @endphp
+                                        @if($item->users_id == $user_id)
+                                            <a class="btn btn-md btn-primary disabled" onclick="orderRequest({{ $item->id }})" href="javascript:void(0);" >Request</a>
+                                        @else
+                                            <a class="btn btn-md btn-primary" href="javascript:void(0);" onclick="orderRequest({{ $item->id }})">Request</a>
+                                        @endif
+
+                                    @endguest
+                                </li>
                             </ul>
                         </div>
                     @endforeach
