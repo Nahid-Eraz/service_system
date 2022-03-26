@@ -25,15 +25,15 @@
 @endphp
 
 
-<div class="row">
+<div class="row pt-5">
     <div class="col-sm-4">
         <div class="card border-0">
             {{-- <div class="border-0"> --}}
                 <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     @foreach (App\Models\WorkOrder::Where('expiration_date','>',$today)->get() as $item  )
-                        <a class="btn card-body nav-link nav-text" id="v-pills-{{ $item->id }}-tab" data-toggle="pill" href="#v-pills-{{ $item->id }}" role="tab" aria-controls="v-pills-{{ $item->id }}" aria-selected="false">
-                            {{ ++$i }}. {{ $item->order_title }}<br>
-                            <small>{{ $item->expiration_date }}</small>
+                        <a class="btn card-body nav-link" id="v-pills-{{ $item->id }}-tab" data-toggle="pill" href="#v-pills-{{ $item->id }}" role="tab" aria-controls="v-pills-{{ $item->id }}" aria-selected="false">
+                            <p class="text-light">{{ ++$i }}. {{ $item->order_title }}</p><br>
+                            <small class="text-light">{{ $item->expiration_date }}</small>
                             {{-- <hr> --}}
                         </a>
                         <hr>
