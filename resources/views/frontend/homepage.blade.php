@@ -179,7 +179,7 @@
 <!--? Testimonials End-->
 
 <!--? Contact Us  Start-->
-<div class="m-3 p-2" id="contact_us">
+<div class="m-3 p-2" id="contact">
 
     <div class="container">
 
