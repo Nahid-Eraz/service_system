@@ -25,15 +25,15 @@
 @endphp
 
 
-<div class="row">
-    <div class="col-sm-4">
+<div class="row pt-5">
+    <div class="col-sm-4" style="height:600px; overflow-y: scroll">
         <div class="card border-0">
             {{-- <div class="border-0"> --}}
                 <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     @foreach (App\Models\WorkOrder::Where('expiration_date','>',$today)->get() as $item  )
-                        <a class="card-body nav-link nav-text" id="v-pills-{{ $item->id }}-tab" data-toggle="pill" href="#v-pills-{{ $item->id }}" role="tab" aria-controls="v-pills-{{ $item->id }}" aria-selected="false">
-                            {{ ++$i }}. {{ $item->order_title }}<br>
-                            <small>{{ $item->expiration_date }}</small>
+                        <a class="btn card-body nav-link" id="v-pills-{{ $item->id }}-tab" data-toggle="pill" href="#v-pills-{{ $item->id }}" role="tab" aria-controls="v-pills-{{ $item->id }}" aria-selected="false">
+                            <p class="text-light">{{ ++$i }}. {{ $item->order_title }}</p><br>
+                            <small class="text-light">{{ $item->expiration_date }}</small>
                             {{-- <hr> --}}
                         </a>
                         <hr>
@@ -57,13 +57,22 @@
                                 <li><p>{{ $item->worker_amount }} Person</p></li>
                                 <li><p>{{ $item->order_description }}</p></li>
                                 <li class="text-right">
-                                @guest
-                                    @if (Route::has('login'))
-                                        <a type="button" class="btn btn-primary" href="{{ route('customer.login') }}">Request</a>
-                                    @endif
-                                @else
-                                    <a class="btn btn-md btn-primary" href="javascript:void(0);" onclick="orderRequest({{ $item->id }})">Request</a>
-                                @endguest</li>
+                                    @guest
+                                        @if (Route::has('login'))
+                                            <a type="button" class="btn btn-primary" href="{{ route('customer.login') }}">Request</a>
+                                        @endif
+                                    @else
+                                    @php
+                                        $user_id = Auth::user()->id;
+                                    @endphp
+                                        @if($item->users_id == $user_id)
+                                            <a class="btn btn-md btn-primary disabled" onclick="orderRequest({{ $item->id }})" href="javascript:void(0);" >Request</a>
+                                        @else
+                                            <a class="btn btn-md btn-primary" href="javascript:void(0);" onclick="orderRequest({{ $item->id }})">Request</a>
+                                        @endif
+
+                                    @endguest
+                                </li>
                             </ul>
                         </div>
                     @endforeach

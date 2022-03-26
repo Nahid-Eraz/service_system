@@ -9688,9 +9688,10 @@ input:focus {
 .nav-text {
     color: #000;
     /* border-radius: 15px; */
-    box-shadow: 5px 6px 5px rgb(211, 211, 211);
+
 }
 .nav-text:hover {
     color: #000;
     background-color: rgb(255, 179, 179);
+    /* box-shadow: 5px 6px 5px rgb(211, 211, 211); */
 }

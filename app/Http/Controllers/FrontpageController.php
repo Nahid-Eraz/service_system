@@ -65,18 +65,18 @@ class FrontpageController extends Controller
     }
     public function request_order_store(Request $request){
 
-        $workorder = new OrderRequests;
-        $workorder->users_id = Auth::user()->id;
-        $workorder->order_title = $request->order_title;
-        $workorder->order_description = $request->order_description;
-        $workorder->address = $request->address;
-        $workorder->expiration_date = $request->expiration_date;
-        $workorder->worker_amount = $request->worker_amount;
-        $workorder->status = 0;
-        $workorder->move_to_trash = 0;
-        $workorder->slug = Str::slug($request->order_title);;
+        $orderrequest = new OrderRequests;
+        $orderrequest->users_id = Auth::user()->id;
+        $orderrequest->order_id = $request->order_id;
+        $orderrequest->amount = $request->amount;
+        // $workorder->address = $request->address;
+        // $workorder->expiration_date = $request->expiration_date;
+        // $workorder->worker_amount = $request->worker_amount;
+        $orderrequest->status = "Pending";
+        // $workorder->move_to_trash = 0;
+        $orderrequest->slug = Str::slug($request->order_title);
 
-        $workorder->save();
+        $orderrequest->save();
         return response()->json(['success' => 'Data added successfully']);
     }
 
