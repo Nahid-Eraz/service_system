@@ -30,6 +30,9 @@ Route::get('/about', function () {
 Route::get('/cart', function () {
     return view('frontend.cart');
 });
+Route::get('/contact_us', function () {
+    return view('frontend.contact_us');
+})->name('contact');
 // Route::get('/allservices', function () {
 //     return view('frontend.allservices');
 // });
