@@ -98,7 +98,7 @@ Route::get('/customorder','App\Http\Controllers\FrontpageController@getdivision'
 Route::get('/custom/order/district/{id}', 'App\Http\Controllers\FrontpageController@getdistrict')->name('customorder.district');
 Route::get('/custom/order/upazila/{id}', 'App\Http\Controllers\FrontpageController@getupazila')->name('customorder.upazila');
 Route::post('/custom/order', 'App\Http\Controllers\FrontpageController@custom_order_store')->name('customorder.add');
-
+Route::get('/order/request/edit/{id}', 'App\Http\Controllers\FrontpageController@request_order');
 
 // User
 Route::get('/user/login','App\Http\Controllers\ClientController@login')->name('login.form');

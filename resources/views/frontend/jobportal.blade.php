@@ -90,7 +90,7 @@
                 <div class="tab-content" id="v-pills-tabContent">
                     @foreach (App\Models\WorkOrder::Where('expiration_date','>',$today)->get() as $item  )
                         <div class="tab-pane fade" id="v-pills-{{ $item->id }}" role="tabpanel" aria-labelledby="v-pills-{{ $item->id }}-tab">
-                            <ul>
+                            <ul id="orderrequest-{{ $item->id }}">
                                 <li><h5 class="text-primary">{{ $item->order_title }}</h5></li>
                                 <li><span>{{ $item->expiration_date }}</span></li>
                                 <li><span><i class="fas fa-map-marker-alt"></i> {{ $item->address }},{{ $item->upazila->name }},{{ $item->district->name }},{{ $item->division->name }} </span></li>
@@ -103,15 +103,9 @@
                                         <a type="button" class="btn btn-primary" href="{{ route('customer.login') }}">Request</a>
                                     @endif
                                 @else
-                                    <button class="btn btn-md btn-primary" data-toggle="modal" data-target="#exampleModal">Request</button>
+                                    <a class="btn btn-md btn-primary" href="javascript:void(0);" onclick="orderRequest({{ $item->id }})">Request</a>
                                 @endguest</li>
                             </ul>
-
-
-
-
-
-
                         </div>
                     @endforeach
                 </div>
@@ -125,7 +119,7 @@
 <!-- About Details End -->
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="OrderRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -135,7 +129,9 @@
           </button>
         </div>
         <div class="modal-body">
-            <form>
+            <form class="forms-sample" id="OrderRequestform" method="post">
+                @csrf
+                <input type="hidden" name="id" id="id">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Price</label>
                   <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="150.00">
@@ -150,5 +146,17 @@
       </div>
     </div>
   </div>
+
+  <script>
+      function orderRequest(id){
+        $.get("/order/request/edit/"+id, function(orderid){
+            $('#id').val(orderid.id);
+            $('#exampleInputEmail1').val(orderid.id);
+            // $('#salary_range1').val(position.salary_range);
+            // $('#balance').val(bank.balance);
+            $('#OrderRequestModal').modal("toggle");
+        });
+    }
+  </script>
 
 @endsection

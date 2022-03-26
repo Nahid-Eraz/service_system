@@ -15,6 +15,14 @@ class CreateOrderrequestsTable extends Migration
     {
         Schema::create('orderrequests', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('users_id');
+            $table->unsignedInteger('work_order_id');
+
+            $table->integer('amount')->nullable();
+            $table->string('slug')->nullable();
+            $table->enum('status',['Accept','Cancel','Pending'])->nullable();
+
+            $table->foreign('work_order_id')->references('id')->on('work_order')->onDelete('cascade');
             $table->timestamps();
         });
     }
