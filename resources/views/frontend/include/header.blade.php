@@ -1,5 +1,5 @@
 <div class="header-area">
-    <div class="main-header header-sticky">
+    <div class="main-header ">
         <div class="container-fluid">
             <div class="menu-wrapper">
                 <!-- Logo -->
@@ -16,7 +16,7 @@
                                 <ul class="submenu">
                                     {{-- @guest
                                         @if ()
-                                            
+
                                         @endif
                                     @endguest --}}
                                     <li><a href="{{route('allservices')}}">All Services</a></li>

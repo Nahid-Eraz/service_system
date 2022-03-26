@@ -20,7 +20,7 @@ class CreateOrderrequestsTable extends Migration
 
             $table->integer('amount')->nullable();
             $table->string('slug')->nullable();
-            $table->enum('status',['Accept','Cancel','Pending'])->nullable();
+            $table->enum('status',['Accept','Cancel','Pending'])->default("Pending");
 
             $table->foreign('work_order_id')->references('id')->on('work_order')->onDelete('cascade');
             $table->timestamps();

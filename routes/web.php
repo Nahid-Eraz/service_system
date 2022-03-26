@@ -21,15 +21,12 @@ Route::get('/', function () {
 Route::get('/homepage', function () {
     return view('frontend.homepage');
 })->name('homepage');
+
 Route::get('/about', function () {
     return view('frontend.about');
 });
-Route::get('/jobportal', function () {
-    return view('frontend.jobportal');
-});
-// Route::get('/customorder', function () {
-//     return view('frontend.customorder');
-// });
+
+
 Route::get('/cart', function () {
     return view('frontend.cart');
 });
@@ -98,7 +95,10 @@ Route::get('/customorder','App\Http\Controllers\FrontpageController@getdivision'
 Route::get('/custom/order/district/{id}', 'App\Http\Controllers\FrontpageController@getdistrict')->name('customorder.district');
 Route::get('/custom/order/upazila/{id}', 'App\Http\Controllers\FrontpageController@getupazila')->name('customorder.upazila');
 Route::post('/custom/order', 'App\Http\Controllers\FrontpageController@custom_order_store')->name('customorder.add');
+
+Route::get('/jobportal','App\Http\Controllers\FrontpageController@jobportal');
 Route::get('/order/request/edit/{id}', 'App\Http\Controllers\FrontpageController@request_order');
+Route::post('/order/request', 'App\Http\Controllers\FrontpageController@request_order_store')->name('orderrequest.add');
 
 // User
 Route::get('/user/login','App\Http\Controllers\ClientController@login')->name('login.form');

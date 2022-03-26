@@ -34,4 +34,8 @@ class WorkOrder extends Model
     public function upazila(){
         return $this->belongsTo(Upazila::class,'upazila_id');
     }
+    // public function orderrequest()
+    // {
+    //     return $this->hasOne(WorkOrder::class,'work_order_id');
+    // }
 }

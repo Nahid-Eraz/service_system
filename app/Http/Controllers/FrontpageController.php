@@ -53,28 +53,32 @@ class FrontpageController extends Controller
         $workorder->worker_amount = $request->worker_amount;
         $workorder->status = 0;
         $workorder->move_to_trash = 0;
-        $workorder->slug = Str::slug($request->order_title);;
+        $workorder->slug = Str::slug($request->order_title);
 
         $workorder->save();
         return response()->json(['success' => 'Data added successfully']);
+    }
+    public function jobportal()
+    {
+        $today = Carbon::now()->format('Y-m-d');
+        $workorder=WorkOrder::Where('expiration_date','>',$today)->get();
+
+        return view('frontend.jobportal',compact('workorder'));
     }
     public function request_order($id)
     {
         $workorder = WorkOrder::find($id);
         return response()->json($workorder);
     }
+
     public function request_order_store(Request $request){
 
         $orderrequest = new OrderRequests;
         $orderrequest->users_id = Auth::user()->id;
-        $orderrequest->order_id = $request->order_id;
+        $orderrequest->work_order_id = $request->order_id;
         $orderrequest->amount = $request->amount;
-        // $workorder->address = $request->address;
-        // $workorder->expiration_date = $request->expiration_date;
-        // $workorder->worker_amount = $request->worker_amount;
         $orderrequest->status = "Pending";
-        // $workorder->move_to_trash = 0;
-        $orderrequest->slug = Str::slug($request->order_title);
+        $orderrequest->slug = Str::slug($request->order_title.'-'.rand(0,100000));
 
         $orderrequest->save();
         return response()->json(['success' => 'Data added successfully']);
