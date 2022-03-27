@@ -102,7 +102,7 @@ Route::post('/custom/order', 'App\Http\Controllers\FrontpageController@custom_or
 Route::get('/jobportal','App\Http\Controllers\FrontpageController@jobportal');
 Route::get('/order/request/edit/{id}', 'App\Http\Controllers\FrontpageController@request_order');
 Route::post('/order/request', 'App\Http\Controllers\FrontpageController@request_order_store')->name('orderrequest.add');
-
+Route::get('/order/request/{name}','App\Http\Controllers\FrontpageController@show')->name('orderrequest.details');
 // User
 Route::get('/user/login','App\Http\Controllers\ClientController@login')->name('login.form');
 Route::post('/user/login','App\Http\Controllers\ClientController@loginSubmit')->name('login.submit');
@@ -110,3 +110,4 @@ Route::get('/user/logout','App\Http\Controllers\ClientController@logout')->name(
 Route::get('user/register','App\Http\Controllers\ClientController@register')->name('register.form');
 Route::post('user/register','App\Http\Controllers\ClientController@registerSubmit')->name('register.submit');
 Route::get('/user/profileview','App\Http\Controllers\ClientController@profileview')->name('profileview');
+

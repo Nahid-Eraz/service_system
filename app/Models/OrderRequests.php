@@ -17,5 +17,8 @@ class OrderRequests extends Model
     public function workorder(){
         return $this->belongsTo(WorkOrder::class,'work_order_id');
     }
+    public function user_name(){
+        return $this->belongsTo(User::class,'users_id');
+    }
 
 }

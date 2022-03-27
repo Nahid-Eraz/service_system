@@ -79,9 +79,16 @@ class FrontpageController extends Controller
         $orderrequest->amount = $request->amount;
         $orderrequest->status = "Pending";
         $orderrequest->slug = Str::slug($request->order_title.'-'.rand(0,100000));
-
         $orderrequest->save();
         return response()->json(['success' => 'Data added successfully']);
+    }
+    public function show($id)
+    {
+        $workorder = WorkOrder::find($id);
+        // $orderrequests = 
+        $orderrequest = OrderRequests::where('work_order_id',$id)->get();
+        // $position = Position::find($id)->where('position_id',$id)->get();
+       return view('frontend.customerpanel.orderrequest', compact('workorder','orderrequest'));
     }
 
 

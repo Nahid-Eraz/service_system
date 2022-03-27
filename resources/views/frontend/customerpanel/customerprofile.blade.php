@@ -85,11 +85,46 @@
                     @foreach (App\Models\WorkOrder::where( 'users_id',$auth_user)->orderByDesc('expiration_date')->get() as $item )
                         <tr>
                             <td>{{ ++$i }}</td>
-                            <td>{{ $item->order_title}}</td>
+                            <td><a href="{{ route('orderrequest.details', $item->id) }}" class="text-primary">{{ $item->order_title}}</a></td>
                             <td>{{ $item->expiration_date}}</td>
                             <td>{{ $item->order_description}}</td>
                             <td>{{ $item->worker_amount}}</td>
                             <td></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="tab-pane fade" id="request" role="tabpanel" aria-labelledby="request-tab">
+            {{-- testing --}}
+
+
+            <table class="table mt-4">
+                <tbody>
+                    <tr>
+                        <th>#</th>
+                        <th>Order Title</th>
+                        <th>Date</th>
+                        <th>Job Discription</th>
+                        <th>Worker Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </tbody>
+                <tbody>
+                    @php
+                        $i=0;
+                        $auth_user = Auth::user()->id
+                    @endphp
+                    @foreach (App\Models\OrderRequests::where( 'users_id',$auth_user)->get() as $item )
+                        <tr>
+                            <td>{{ ++$i }}</td>
+                            <td>{{ $item->workorder->order_title}}</td>
+                            <td>{{ $item->workorder->expiration_date}}</td>
+                            <td>{{ $item->workorder->order_description}}</td>
+                            <td>{{ $item->amount}}</td>
+                            <td>{{ $item->status }}</td>
                         </tr>
                     @endforeach
                 </tbody>

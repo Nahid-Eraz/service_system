@@ -69,30 +69,23 @@
                                         $orderrequest = App\Models\OrderRequests::select('work_order_id','users_id')
                                                                                 // ->where('work_order_id',$item_id)
                                                                                 ->where('users_id',$user_id)
-                                                                                ->get();
-                                        foreach ($orderrequest as $key) {
-                                            $orreq1 = $key->users_id;
-                                            $orreq = $key->work_order_id;
-                                            echo ($orreq1);
-                                            echo ($orreq);
-                                        };
+                                                                                // ->find($item->id);
+                                                                                ->first();
+                                                                                // ->get();
 
-                                        // // $orderrequest1 = App\Models\OrderRequests::select('users_id','work_order_id')->where('work_order_id',$item->id)->where('users_id',$user_id)->get();
-                                        // foreach ($orderrequest1 as $key2) {
-                                        //     $workorder = $key2->users_id;
-                                        //     echo ($workorder);
-                                        // }
+                                                                                $orreq= $orderrequest['work_order_id'];
+                                                                                $userss_id = $orderrequest['users_id'];
                                     @endphp
                                         @if(($item->users_id == $user_id))
                                             <a class="btn btn-md btn-primary disabled" onclick="orderRequest({{ $item->id }})" href="javascript:void(0);" >Request</a>
 
-                                        @elseif($orreq1 == $user_id && $orreq == $item_id)
+                                        @elseif($userss_id == $user_id && $orreq == $item_id)
 
                                                 <a class="btn btn-md btn-primary disabled" onclick="orderRequest({{ $item->id }})" href="javascript:void(0);" >Request</a>
 
-                                            @else
+                                        @else
                                                 <a class="btn btn-md btn-primary" href="javascript:void(0);" onclick="orderRequest({{ $item->id }})">Request</a>
-                                            
+
                                         @endif
 
                                     @endguest
